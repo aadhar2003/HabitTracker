@@ -1,12 +1,22 @@
-import React, { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import QuestionContext from './QuestionContext';
+
+interface Question {
+  id: string;
+  url?: string;
+  title: string;
+  status: string;
+  dateAdded: string;
+  daysLeft: number;
+  deleteQuestion?: (id: string) => void;
+}
 
 type QuestionStateProps = {
   children: ReactNode;
 };
 
 const QuestionState = ({ children }: QuestionStateProps) => {
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
 
   // Load questions from localStorage on component mount
   useEffect(() => {

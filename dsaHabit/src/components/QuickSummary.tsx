@@ -2,7 +2,12 @@
 import { useContext } from "react";
 import QuestionContext from "../context/Questions/QuestionContext";
 export function QuickSummary() {
-  const {questions} = useContext(QuestionContext);
+  const questionContext = useContext(QuestionContext);
+  if (!questionContext) {
+    throw new Error('QuestionContext is not provided');
+  }
+  
+  const { questions } = questionContext;
   // const [pendingReviews, setPendingReviews] = useState(0);
 
   // useEffect(() => {

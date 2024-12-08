@@ -7,8 +7,9 @@ interface Question{
   title: string;
   daysLeft: number;
   status: string;
-  url: string;
+  url?: string;
   dateAdded: string;
+  deleteQuestion: (id: string) => void;
   
 }
 // ... keep the existing calculateDaysLeft function ...
@@ -65,9 +66,12 @@ function extractProblemName(url: string | undefined): string {
 }
 
 export default function Notifications() {
-  const { questions, setQuestions, deleteQuestion } = useContext(QuestionContext);
+  const questionContext = useContext(QuestionContext);
+  if (!questionContext) {
+    throw new Error('QuestionContext is not provided.');
+  }
   
-
+  const { questions, setQuestions, deleteQuestion } = questionContext;
   useEffect(() => {
     const existingQuestionsStr = localStorage.getItem('questions') || '[]';
     const existingQuestions = JSON.parse(existingQuestionsStr);
@@ -83,7 +87,7 @@ export default function Notifications() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-white mb-6">Notifications</h1>
       <div className="space-y-4">
-        {questions.map((question: Question) => (
+        {questions.map((question) => (
           <NotificationCard
             key={question.id}
             {...question}
@@ -100,17 +104,10 @@ function NotificationCard({
   daysLeft, 
   status, 
   url ,
-  deleteQuestion,
-  id
+  id,
+  deleteQuestion
 
-}: { 
-  title: string; 
-  daysLeft: number; 
-  status: string;
-  url: string;
-  deleteQuestion: (id: string) => void;
-  id: string;
-}) {
+}:Question ) {
   const getStatusColor = (status: string): string => {
     switch (status.toLowerCase()) {
       case 'solved independently':

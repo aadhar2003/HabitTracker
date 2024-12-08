@@ -1,9 +1,9 @@
-import React from 'react';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavigationBar } from './components/NavigationBar';
 import Home from './pages/Home';
 import AddQuestion from './pages/AddQuestion.tsx';
-import QuestionDetails from './pages/QuestionDetails.tsx';
+// import QuestionDetails from './pages/QuestionDetails.tsx';
 import Notifications from './pages/Notifications';
 import Settings from './pages/Settings';
 import './App.css';
@@ -18,7 +18,7 @@ function App() {
             <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/add-question" element={<AddQuestion />} />
-            <Route path="/question/:id" element={<QuestionDetails />} />
+            {/* <Route path="/question/:id" element={<QuestionDetails />} /> */}
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>

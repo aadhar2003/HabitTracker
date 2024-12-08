@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Plus, Bell, Settings } from 'lucide-react';
+import { Home, Plus, Bell} from 'lucide-react';
 
 export function NavigationBar() {
   return (
